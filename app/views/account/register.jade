@@ -3,16 +3,30 @@ extends ../layout
 block content
     h1= Register
     p Create an account
-    form(name="register_form" method="post" novalidate)
+    form(name="register_form" method="post" ng-controller="RegisterController" novalidate)
         div.input
-            span.label Mail address
-            input(type="email" name="mail" id="mail" class="form-control" ng-model="mail" required)
-            span.label Please repeat mail address
-            input(type="text" name="mail_2" class="form-control" ng-model="mail_2" required)
-            span.label Password
-            input(type="password" name="password" class="form-control" ng-model="password" required)
-            span.label Please repeat password
-            input(type="password" name="password_2" class="form-control" ng-model="password_2" required)
+            div
+                span.label(ng-show="register_form.user_mail.$error.mustRepeat || register_form.user_mail_2.$error.mustRepeat ") Please check your email
+                br
+                span.label Mail address
+                input(type="email" name="user_mail" id="user_mail" must-repeat="register_form.user_mail_2"
+                     ng-model="user_mail" required)
+                label(for="user_mail" data-error="wrong" data-success="right")
+
+                span.label Please repeat mail address
+                input(type="email" name="user_mail_2" id="user_mail_2"
+                    must-repeat="register_form.user_mail" ng-model="user_mail_2" required)
+                label(for="user_mail_2" data-error="wrong" data-success="right")
+
+            div
+                span.label(ng-show="register_form.user_passwd.$error.mustRepeat || register_form.user_passwd_2.$error.mustRepeat") Please check your password
+                br
+                span.label Password
+                input(type="password" name="user_passwd" id="user_passwd" must-repeat="register_form.user_passwd_2"
+                    ng-model="user_passwd" required)
+                span.label Please repeat password
+                input(type="password" name="user_passwd_2" id="user_passwd_2"
+                    must-repeat="register_form.user_passwd" ng-model="user_passwd_2" required)
         div.actions
             button(type="submit" class="waves-effect waves-light btn" name="register_action"
             ng-class="{'disabled': register_form.$invalid === true}") Register

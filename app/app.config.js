@@ -1,16 +1,17 @@
 module.exports = () => {
 
-  var commanduApp = angular.module('commanduApp', [
-    'ui.router',
-    'homeControllers',
-    'pascalprecht.translate'
-  ]);
+    require('./services/inputs_compare')(angular);
+    var commanduApp = angular.module('commanduApp', [
+        'ui.router',
+        'homeControllers',
+        'pascalprecht.translate'
+    ]);
 
-  //require('./lib/conf/translate')(duniterApp);
-  require('./lib/conf/routes')(commanduApp);
+    //require('./lib/conf/translate')(duniterApp);
+    require('./lib/conf/routes')(commanduApp);
 
-  let homeControllers = angular.module('homeControllers', []);
+    let homeControllers = angular.module('homeControllers', ['commandu.services']);
 
-  homeControllers.controller('IndexController',  require('./controllers/IndexController'));
-  homeControllers.controller('RegisterController', require('./controllers/main/account/RegisterController'));
- };
+    homeControllers.controller('IndexController', require('./controllers/IndexController'));
+    homeControllers.controller('RegisterController', require('./controllers/main/account/RegisterController'));
+};
