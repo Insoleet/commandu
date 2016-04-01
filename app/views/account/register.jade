@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    h1= Register
+    p Create an account
+    form(name="register_form" method="post" novalidate)
+        div.input
+            span.label Mail address
+            input(type="email" name="mail" id="mail" class="form-control" ng-model="mail" required)
+            span.label Please repeat mail address
+            input(type="text" name="mail_2" class="form-control" ng-model="mail_2" required)
+            span.label Password
+            input(type="password" name="password" class="form-control" ng-model="password" required)
+            span.label Please repeat password
+            input(type="password" name="password_2" class="form-control" ng-model="password_2" required)
+        div.actions
+            button(type="submit" class="waves-effect waves-light btn" name="register_action"
+            ng-class="{'disabled': register_form.$invalid === true}") Register
+                ir(class="material-icons right")
