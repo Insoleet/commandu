@@ -23,7 +23,7 @@ let AccountController = function(server) {
         }
 
         let account = new server.db.model('Account')({
-            mail: userEmail,
+            email: userEmail,
             passwordHash: crypto.createHash('sha256').update(userPassword).digest('base64')
         });
         let context = {}
@@ -33,7 +33,7 @@ let AccountController = function(server) {
             if (err) {
                 context.errorMessage = {
                     title: "Account creation",
-                    text: "There was a problem adding the information to the database."
+                    text: err
                 }
             }
             else {
