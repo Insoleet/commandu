@@ -30,6 +30,7 @@
     "stylus-brunch": "2.0.0",
     "uglify-js-brunch": "2.0.1",
     "auto-reload-brunch": "2.0.0",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "mongoose": "4.4.10"
   }
 }
