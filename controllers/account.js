@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require('express');
-const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 let AccountController = function(server) {
@@ -12,9 +11,6 @@ let AccountController = function(server) {
     });
 
     router.post('/register', (req, res) =>  {
-        // Set our internal DB letiable
-        let db = req.db;
-
         // Get our form values. These rely on the "name" attributes
         let userEmail = req.body.user_mail;
         let userPassword = req.body.user_passwd;
@@ -26,17 +22,30 @@ let AccountController = function(server) {
             res.send("Your passwords were different");
         }
 
-        // Creating one user.
-        let account = new mongoose.Model('Account')({
+        let account = new server.db.model('Account')({
             mail: userEmail,
             passwordHash: crypto.createHash('sha256').update(userPassword).digest('base64')
         });
+        let context = {}
 
         // Saving it to the database.
-        account.save( err => res.send("There was a problem adding the information to the database.") );
+        account.save( err => {
+            if (err) {
+                context.errorMessage = {
+                    title: "Account creation",
+                    text: "There was a problem adding the information to the database."
+                }
+            }
+            else {
+                context.successMessage = {
+                    title: "Account creation",
+                    text: "Succefully created your account"
+                };
+            }
 
-        // And forward to success page
-        res.redirect("success");
+            // And forward to success page
+            res.render("index", context);
+        });
     });
     return router;
 };

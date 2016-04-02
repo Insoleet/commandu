@@ -19,6 +19,10 @@ html(ng-app="commanduApp")
           i.material-icons menu
     #index-banner.section.no-pad-bot
       .container
+        if successMessage
+          include include/success
+        if errorMessage
+          include include/error
         block content
       .section
     footer.page-footer.orange
