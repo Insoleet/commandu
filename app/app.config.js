@@ -13,5 +13,5 @@ module.exports = () => {
     let homeControllers = angular.module('homeControllers', ['commandu.services']);
 
     homeControllers.controller('IndexController', require('./controllers/IndexController'));
-    homeControllers.controller('RegisterController', require('./controllers/main/account/RegisterController'));
+    homeControllers.controller('AccountController', require('./controllers/main/AccountController'));
 };

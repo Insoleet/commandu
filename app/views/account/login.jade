@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+    h1= Login
+    p Connect
+    form.col.s12(name="login_form" method="post" action="/account/login" novalidate)
+        div.input
+            div.input-field.col.s12
+                input.validate(type="email" name="user_mail" id="user_mail" ng-model="user_mail" required)
+                label(for="user_mail" data-error="Please enter an email address" data-success="OK") Mail address
+
+            div.input-field.col.s12
+                input.validate(type="password" name="user_passwd" id="user_passwd" ng-model="user_passwd" required)
+                label(for="user_passwd" data-error="wrong" data-success="right") Password
+        div.actions
+            button(type="submit" class="waves-effect waves-light btn" name="login_action"
+            ng-class="{'disabled': login_form.$invalid === true}" ) Login
+                li(class="material-icons right") send

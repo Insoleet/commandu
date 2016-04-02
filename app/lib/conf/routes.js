@@ -10,10 +10,14 @@ module.exports = (app) => {
                 url: '/',
                 template: require('views/index'),
                 controller: 'IndexController'
+            }).state('account.login', {
+                url: '/account/login',
+                template: require('views/account/login'),
+                controller: 'AccountController'
             }).state('account.register', {
                 url: '/account/register',
                 template: require('views/account/register'),
-                controller: 'RegisterController'
+                controller: 'AccountController'
             });
 
             // Default route

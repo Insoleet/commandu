@@ -3,7 +3,7 @@ extends ../layout
 block content
     h1= Register
     p Create an account
-    form.col.s12(name="register_form" method="post" ng-controller="RegisterController" novalidate)
+    form.col.s12(name="register_form" method="post" action="/account/register" novalidate)
         div.input
             span.label(ng-show="register_form.user_mail.$error.mustRepeat || register_form.user_mail_2.$error.mustRepeat ") Please check your email
             div.input-field.col.s12
