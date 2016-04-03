@@ -1,15 +1,27 @@
 nav.light-blue.lighten-1(role='navigation')
     .nav-wrapper.container
         a#logo-container.brand-logo(href='#') Logo
-        ul.right.hide-on-med-and-down
-            li
-                a(href='/account/register') Register
-            li
-                a(href='/account/login') Login
-        ul#nav-mobile.side-nav
-            li
-                a(href='/account/register') Register
-            li
-                a(href='/account/login') Login
+            ul.right.hide-on-med-and-down
+                if (!user)
+                    li
+                        a(href='/account/register') Register
+                    li
+                        a(href='/account/login') Login
+                if (user)
+                    li
+                        a(href="account/profile") #{user.email}
+                    li
+                        a(href="account/logout") Logout
+            ul#nav-mobile.side-nav
+                if (!user)
+                    li
+                        a(href='/account/register') Register
+                    li
+                        a(href='/account/login') Login
+                if (user)
+                    li
+                        a(href="account/profile") #{user.email}
+                    li
+                        a(href="account/logout") Logout
         a.button-collapse(href='#', data-activates='nav-mobile')
             i.material-icons menu

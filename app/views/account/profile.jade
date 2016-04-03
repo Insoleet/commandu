@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+    h1= Profile
+    ul.collection
+        li.collection-item.avatar
+            img.circle(src="images/yuna.jpg" alt="")
+            span.title #{user.email}
+            p
+                | First Line </br>
+                | Second Line

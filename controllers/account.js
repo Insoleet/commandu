@@ -5,13 +5,26 @@ const express = require('express');
 const crypto = require('crypto');
 const passport = require('passport');
 
-const AccountController = function(server) {
+const AccountController = (server) => {
     const getRegister = (req, res, next) => {
         res.render('account/register');
     };
 
     const getLogin = (req, res, next) => {
         res.render('account/login');
+    };
+
+    const getLogout = (req, res, next) => {
+        if (!req.isAuthenticated())
+            return next();
+        req.logout();
+        res.redirect('/');
+    };
+
+    const getProfile = (req, res, next) => {
+        if (!req.isAuthenticated())
+            return next();
+        res.render('account/profile');
     };
 
     const router = express.Router();
@@ -25,6 +38,8 @@ const AccountController = function(server) {
         successRedirect: '/',
         failureRedirect: '/account/login'
     }));
+    router.get('/logout', server.isAuthenticated, getLogout);
+    router.get('/profile', server.isAuthenticated, getProfile);
     return router;
 };
 

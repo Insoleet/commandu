@@ -39,9 +39,26 @@ const AccountService = function(server) {
         }
     });
 
+    const getAccount = (id) => co(function*() {
+        try {
+            const account = yield server.db.model('Account').findById(id);
+            if (account) {
+                return account;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err.message);
+            return false;
+        }
+    });
+
     return {
         registerAccount: registerAccount,
-        loginAccount: loginAccount
+        loginAccount: loginAccount,
+        getAccount: getAccount
     };
 };
 
