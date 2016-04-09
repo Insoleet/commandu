@@ -1,0 +1,48 @@
+@startuml
+
+
+class User {
+    name: String,
+    avatar: String,
+    email: String,
+    country: String
+    city: String,
+    address: String,
+    telephone: String
+}
+
+class Rating {
+    description: String
+    note: Number
+}
+
+Rating "1" --> "1" User : from
+Rating "1" --> "1" User : to
+
+User "*" --> "*" User : references
+User "1" --> "1" Account : user account
+
+class Account {
+    email: String
+    password: String
+}
+
+Account "1" --> "*" WebIdentity
+Account "1" --> "1" DuniterIdentity
+
+class WebIdentity {
+    service: String
+}
+
+
+class DuniterIdentity {
+    uid: String,
+    pubkey: String,
+    member: Boolean,
+    revoked: Boolean
+}
+
+DuniterIdentity "1" --> "*" DuniterIdentity : Certified
+
+
+@enduml
